@@ -16,8 +16,8 @@ type Service struct {
 }
 
 // NewService creates a new shortener service.
-func NewService(rdb *redis.Client) *Service {
-	return &Service{rdb: rdb}
+func NewService(rdb *redis.Client, ctx context.Context) *Service {
+	return &Service{rdb: rdb, ctx: ctx}
 }
 
 // RedirectToOriginal resolves a shortened URL to its original and redirects the user.

@@ -1,11 +1,19 @@
 package shortener
 
-import "github.com/gin-gonic/gin"
+import (
+	"context"
 
-func RegisterRoutes(r *gin.Engine, svc *Service) {
+	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
+)
+
+func RegisterRoutes(r *gin.Engine, rdb *redis.Client) {
 	shortenerGroup := r.Group("/")
+	ctx := context.Background()
+
 	{
-		shortenerGroup.GET("/:shortURL", svc.RedirectToOriginal)
-		shortenerGroup.POST("/shorten", svc.ShortenURL)
+		shortenerService := NewService(rdb, ctx)
+		shortenerGroup.GET("/:shortURL", shortenerService.RedirectToOriginal)
+		shortenerGroup.POST("/shorten", shortenerService.ShortenURL)
 	}
 }

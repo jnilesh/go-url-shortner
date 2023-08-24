@@ -2,7 +2,6 @@ package main
 
 import (
 	"go-url-shortner/internal/modules"
-	"go-url-shortner/internal/modules/shortener"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -10,10 +9,9 @@ import (
 
 func main() {
 	rdb := NewRedisClient("localhost:6379", 0)
-	shortenerService := shortener.NewService(rdb)
 
 	router := gin.Default()
-	modules.RegisterRoutes(router, shortenerService)
+	modules.RegisterRoutes(router, rdb)
 
 	err := router.Run(":8080")
 	if err != nil {

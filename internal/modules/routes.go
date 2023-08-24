@@ -4,8 +4,10 @@ import (
 	"go-url-shortner/internal/modules/shortener"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 )
 
-func RegisterRoutes(r *gin.Engine, shortenerService *shortener.Service) {
-	shortener.RegisterRoutes(r, shortenerService)
+func RegisterRoutes(r *gin.Engine, rdb *redis.Client) {
+	shortener.RegisterRoutes(r, rdb)
+
 }
