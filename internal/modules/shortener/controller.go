@@ -9,7 +9,8 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-// Service encapsulates the logic for the URL shortener.
+// Service encapsulates the logic for the URL shortener. ok
+
 type Service struct {
 	rdb *redis.Client
 	ctx context.Context

@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"go-url-shortner/internal/modules/list"
 	"go-url-shortner/internal/modules/shortener"
 
 	"github.com/gin-gonic/gin"
@@ -9,5 +10,5 @@ import (
 
 func RegisterRoutes(r *gin.Engine, rdb *redis.Client) {
 	shortener.RegisterRoutes(r, rdb)
-
+	list.RegisterRoutes(r, rdb)
 }
